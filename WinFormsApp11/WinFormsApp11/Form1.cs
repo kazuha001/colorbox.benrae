@@ -1,63 +1,63 @@
-namespace WinFormsApp11;
-
-public partial class Form1 : Form
+namespace WinFormsApp11
 {
-    public Form1()
+    public partial class Form1 : Form
     {
-        InitializeComponent();
-    }
-
-    private void button1_Click_1(object sender, EventArgs e)
-    {
-       
-    
         
-   
-        Label me1 = new Label();
-        me1.Location = new Point(35, 40);
-        me1.BackColor = Color.LightGreen;
-        me1.Size = new Size(163, 42);
-        this.Controls.Add(me1);
-  
-        Label me2 = new Label();
-        me2.Location = new Point(153, 82);
-        me2.BackColor = Color.Silver;
-        me2.Size = new Size(165, 85);
-        this.Controls.Add(me2);
-   
+        private Label[] labels;
 
-   
-        Label me3 = new Label();
-        me3.Location = new Point(154, 167);
-        me3.BackColor = Color.Red;
-        me3.Size = new Size(164, 148);
-        this.Controls.Add(me3);
-    
-        Label me4 = new Label();
-        me4.Location = new Point(195, 40);
-        me4.BackColor = Color.Yellow;
-        me4.Size = new Size(123, 42);
-        this.Controls.Add(me4); 
-   
-        Label me5 = new Label();
-        me5.Location = new Point(35, 82);
-        me5.BackColor = Color.Blue;
-        me5.Size = new Size(122, 117);
-        this.Controls.Add(me5);
-   
-        Label me6 = new Label();
-        me6.Location = new Point(35, 198);
-        me6.BackColor = Color.DarkOliveGreen;
-        me6.Size = new Size(122, 117);
-        this.Controls.Add(me6);
-   
-        Label me7 = new Label();
-        me7.Location = new Point(318, 40);
-        me7.BackColor = Color.Blue;
-        me7.Size = new Size(145, 275);
-        this.Controls.Add(me7);  
+        public Form1()
+        {
+            InitializeComponent();
+            InitializeLabels(); 
+        }
+
+        private void InitializeLabels()
+        {
+            string[] values = { "LightGreen", "Silver", "Blue", "Yellow", "DarkOliveGreen" };
+            Random rnd = new Random();
+           
+            var labelInfo = new[]
+            {
+                new { Location = new Point(35, 40), Size = new Size(163, 42) },
+                new { Location = new Point(153, 82), Size = new Size(165, 85) },
+                new { Location = new Point(154, 167), Size = new Size(164, 148) },
+                new { Location = new Point(195, 40), Size = new Size(123, 42) },
+                new { Location = new Point(35, 82), Size = new Size(122, 117) },
+                new { Location = new Point(35, 198), Size = new Size(122, 117) },
+                new { Location = new Point(318, 40), Size = new Size(145, 275) }
+            };
+
+        
+            labels = new Label[labelInfo.Length];
+            
+            for (int i = 0; i < labelInfo.Length; i++)
+            {
+                int index = rnd.Next(0, values.Length); 
+
+                Label me = new Label();
+                me.Location = labelInfo[i].Location;
+                me.Size = labelInfo[i].Size;
+                me.BackColor = Color.FromName(values[index]);
+
+             
+                labels[i] = me;
+
+              
+                this.Controls.Add(me);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            
+            string[] values = { "LightGreen", "Silver", "Blue", "Yellow", "DarkOliveGreen", "red", "orange" };
+            Random rnd = new Random();
+            
+            for (int i = 0; i < labels.Length; i++)
+            {
+                int index = rnd.Next(0, values.Length); 
+                labels[i].BackColor = Color.FromName(values[index]);
+            }
+        }
     }
-
-    
 }
-
